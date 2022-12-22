@@ -1,0 +1,1 @@
+/usr/bin/cc -fPIC -shared -Wl,-soname,libstructures_submission.so -o libstructures_submission.so CMakeFiles/structures_submission.dir/src/linked_list.c.o 
