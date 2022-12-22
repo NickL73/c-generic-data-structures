@@ -1,2 +1,4 @@
 ### Visial Studio Code ###
 .vscode/*
+/build
+todo.txt

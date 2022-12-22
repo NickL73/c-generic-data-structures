@@ -5,11 +5,12 @@
 #include "../include/linked_list.h"
 
 /*Define constants used for error values*/
-#define NULL_INP_ERROR 10001
-#define ALLOC_FAILURE  10002
+#define NULL_INP_ERROR      10001
+#define ALLOC_FAILURE       10002
+#define NODE_CREATE_FAILURE 10003
 
 /*Function Prototypes*/
-static linked_list_node_t * create_node (int p_data);
+static linked_list_node_t * create_node (int data);
 
 /*Public Functions*/
 linked_list_t * create_new_linked_list (int * p_items, size_t num_items)
@@ -26,7 +27,6 @@ linked_list_t * create_new_linked_list (int * p_items, size_t num_items)
     {
         goto COMPLETE;
     }
-    p_new_list->size = num_items;
 
     uint8_t error_status = 0;
     for (size_t idx = 0; idx < num_items; idx++)
@@ -51,7 +51,7 @@ uint64_t append_linked_list (int p_item, linked_list_t * p_list)
     linked_list_node_t * p_new_node = create_node(p_item);
     if (NULL == p_new_node)
     {
-        ret_val = ALLOC_FAILURE;
+        ret_val = NODE_CREATE_FAILURE;
         goto COMPLETE;
     }
 
@@ -71,12 +71,42 @@ uint64_t append_linked_list (int p_item, linked_list_t * p_list)
         }
 
         p_curr->p_next = p_new_node;
+        p_list->size += 1;
     }
 
     ret_val = EXIT_SUCCESS;
 
     COMPLETE:
         return ret_val;
+}
+
+uint64_t preprend_linked_list (int item, linked_list_t * p_list)
+{
+    uint64_t ret_val = 0;
+
+    if (NULL == p_list)
+    {
+        ret_val = NULL_INP_ERROR;
+        goto COMPLETE;
+    }
+
+    linked_list_node_t * p_new_node = create_node(item);
+    if (NULL == p_new_node)
+    {
+        ret_val = NODE_CREATE_FAILURE;
+        goto COMPLETE;
+    }
+
+    p_new_node->p_next = p_list->p_head;
+    p_list->p_head     = p_new_node;
+
+    p_list->size += 1;
+
+    ret_val = EXIT_SUCCESS;
+
+    COMPLETE:
+        return ret_val;
+
 }
 
 uint64_t destroy_linked_list (linked_list_t * p_list)
@@ -112,7 +142,7 @@ uint64_t destroy_linked_list (linked_list_t * p_list)
 } 
 
 /*Private Functions*/
-static linked_list_node_t * create_node (int p_data)
+static linked_list_node_t * create_node (int data)
 {
     linked_list_node_t * p_new_node = NULL;
     
@@ -122,7 +152,7 @@ static linked_list_node_t * create_node (int p_data)
         goto COMPLETE;
     }
 
-    p_new_node->p_data = p_data;
+    p_new_node->data = data;
     p_new_node->p_next = NULL;
 
     COMPLETE:

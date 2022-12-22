@@ -20,7 +20,11 @@ int main (int argc, char * argv[])
         return CU_get_error();
     }
 
-    if ((NULL == CU_add_test(ll_test_suite, "test of create_linked_list()", test_create_linked_list)))
+    if ((NULL == CU_add_test(ll_test_suite, "test of create linked list", test_create_linked_list)) ||
+        (NULL == CU_add_test(ll_test_suite, "test of create empty list", test_create_empty_list)) ||
+        (NULL == CU_add_test(ll_test_suite, "test of append to linked list", test_append_linked_list)) ||
+        (NULL == CU_add_test(ll_test_suite, "testing append to empty list", test_append_empty_list))
+        )
     {
         CU_cleanup_registry();
         return CU_get_error();
