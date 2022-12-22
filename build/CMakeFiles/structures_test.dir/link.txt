@@ -1,1 +1,0 @@
-/usr/bin/cc -fPIC -shared -Wl,-soname,libstructures_test.so -o libstructures_test.so CMakeFiles/structures_test.dir/tests/linked_lists_tests.c.o 

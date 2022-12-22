@@ -1,5 +1,0 @@
-/home/nick/structures/build/CMakeFiles/rebuild_cache.dir
-/home/nick/structures/build/CMakeFiles/structures_exe.dir
-/home/nick/structures/build/CMakeFiles/edit_cache.dir
-/home/nick/structures/build/CMakeFiles/structures_test.dir
-/home/nick/structures/build/CMakeFiles/structures_submission.dir

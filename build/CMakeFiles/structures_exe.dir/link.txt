@@ -1,1 +1,0 @@
-/usr/bin/cc CMakeFiles/structures_exe.dir/tests/main_tests.c.o CMakeFiles/structures_exe.dir/src/linked_list.c.o -o structures_exe  -Wl,-rpath,/home/nick/structures/build libstructures_submission.so libstructures_test.so -lcunit 
