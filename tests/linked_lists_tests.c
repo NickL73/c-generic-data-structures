@@ -22,8 +22,8 @@ void test_create_linked_list (void)
 void test_create_empty_list (void)
 {
     linked_list_t * p_test = create_new_linked_list(NULL, 0);
-    CU_ASSERT_PTR_NOT_NULL(p_test);
-    CU_ASSERT_PTR_NULL(p_test->p_head);
+    CU_ASSERT_PTR_NOT_NULL(p_test); /*NULL input should produce a list, empty*/
+    CU_ASSERT_PTR_NULL(p_test->p_head); /*No elements*/
     CU_ASSERT_EQUAL(p_test->size, 0);
 
     destroy_linked_list(p_test);
@@ -68,6 +68,38 @@ void test_append_empty_list (void)
 
     destroy_linked_list(p_test);
 
+}
+
+void test_prepend_empty_list (void)
+{
+    linked_list_t * p_test = create_new_linked_list(NULL, 0);
+
+    uint64_t error_status = preprend_linked_list(1, p_test);
+
+    CU_ASSERT_PTR_NOT_NULL(p_test->p_head);
+    CU_ASSERT_EQUAL(p_test->p_head->data, 1);
+    CU_ASSERT_EQUAL(error_status, EXIT_SUCCESS);
+    CU_ASSERT_EQUAL(p_test->size, 1);
+
+    destroy_linked_list(p_test);
+}
+
+void test_prepend_list (void)
+{
+    int             items[] = {1, 2, 3, 4, 5}; 
+    linked_list_t * p_test  = create_new_linked_list(items, 5);
+
+    linked_list_node_t * p_orig_head = p_test->p_head;
+
+    uint64_t error_status = preprend_linked_list(100, p_test);
+
+    CU_ASSERT_EQUAL(error_status, EXIT_SUCCESS);
+    CU_ASSERT_PTR_NOT_NULL(p_test->p_head);
+    CU_ASSERT_EQUAL(p_test->p_head->data, 100);
+    CU_ASSERT_EQUAL(p_test->size, 6);
+    CU_ASSERT_PTR_EQUAL(p_test->p_head->p_next, p_orig_head);
+
+    destroy_linked_list(p_test);
 }
 
 static uint8_t test_ll_contents (linked_list_t * p_list, int * p_input, size_t len)
