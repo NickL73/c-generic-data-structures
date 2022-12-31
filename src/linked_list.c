@@ -109,36 +109,26 @@ uint64_t preprend_linked_list (int item, linked_list_t * p_list)
 
 }
 
-uint64_t destroy_linked_list (linked_list_t * p_list)
-{
-    uint64_t ret_val = 0;
-    
-    if (NULL == p_list)
+void destroy_linked_list (linked_list_t * p_list)
+{    
+    if (NULL != p_list)
     {
-        ret_val = NULL_INP_ERROR;
-        goto COMPLETE;
+        linked_list_node_t * p_curr = p_list->p_head;
+
+        while (NULL != p_curr)
+        {
+            linked_list_node_t * p_temp = p_curr;
+            p_curr = p_curr->p_next;
+
+            memset(p_temp, 0, sizeof(linked_list_node_t));
+            free(p_temp);
+            p_temp = NULL;
+        }
+
+        memset(p_list, 0, sizeof(linked_list_t));
+        free(p_list);
+        p_list = NULL;
     }
-
-    linked_list_node_t * p_curr = p_list->p_head;
-
-    while (NULL != p_curr)
-    {
-        linked_list_node_t * p_temp = p_curr;
-        p_curr = p_curr->p_next;
-
-        memset(p_temp, 0, sizeof(linked_list_node_t));
-        free(p_temp);
-        p_temp = NULL;
-    }
-
-    memset(p_list, 0, sizeof(linked_list_t));
-    free(p_list);
-    p_list = NULL;
-
-    ret_val = EXIT_SUCCESS;
-
-    COMPLETE:
-        return ret_val;
 } 
 
 /*Private Functions*/
