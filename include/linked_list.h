@@ -1,9 +1,11 @@
 #include <stddef.h>
 #include <stdint.h>
 
-//Define error values for checking function failures
-#define NULL_INPUT 9
-#define CALLOC_FAIL 8
+/*Define constants used for error values*/
+#define NULL_INP_ERROR      10001
+#define ALLOC_FAILURE       10002
+#define NODE_CREATE_FAILURE 10003
+#define INVALID_INDEX_ERROR 10004
 
 typedef struct linked_list_node_t
 {
@@ -83,20 +85,21 @@ void clear_linked_list (linked_list_t * p_list);
  * @param item Integer value of item to search for.
  * @param p_list Pointer to the linked list to search.
  * 
- * @return The index of the first occurence of the input item, or -1 
- * if item not in the list.
+ * @return The index of the first occurence of the input item, or the size of
+ * the list if item not in the list.
 */
-int64_t search_linked_list (int item, linked_list_t * p_list);
+uint64_t search_linked_list (int item, linked_list_t * p_list);
 
 /**
- * @brief Inserts a given item into a linked list at a specified index.
+ * @brief Inserts a given item into a linked list at a specified index, pushing
+ * all subsequent items to the right.
  * 
  * @param index Index to insert new item at, must be lower than the size of the
  * list and greater than zero.
  * @param item Value of the new item to insert.
  * @param p_list Pointer to the linked list to which to add the new item.
  * 
- * @return 0 on success, error code otherwise.
+ * @return EXIT_SUCCESS on success, error code otherwise.
 */
 uint64_t insert_linked_list (uint64_t index, int item, linked_list_t * p_list);
 
@@ -109,6 +112,8 @@ uint64_t insert_linked_list (uint64_t index, int item, linked_list_t * p_list);
  * @return 0 on success, error code otherwise.
 */
 uint64_t remove_item_linked_list (int item, linked_list_t * p_list);
+
+uint64_t replace_item_linked_list(int index, int new_item, linked_list_t * p_list);
 
 uint64_t combine_linked_list (linked_list_t * p_target, linked_list_t * p_to_add);
 

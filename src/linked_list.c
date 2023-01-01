@@ -4,11 +4,6 @@
 #include <string.h>
 #include "../include/linked_list.h"
 
-/*Define constants used for error values*/
-#define NULL_INP_ERROR      10001
-#define ALLOC_FAILURE       10002
-#define NODE_CREATE_FAILURE 10003
-
 /*Function Prototypes*/
 static linked_list_node_t * create_node (int data);
 
@@ -131,23 +126,52 @@ void destroy_linked_list (linked_list_t * p_list)
     }
 } 
 
-void delete_left_linked_list (linked_list_t * p_list);
+void delete_left_linked_list (linked_list_t * p_list)
+{
+    return;
+}
 
-void delete_right_linked_list (linked_list_t * p_list);
+void delete_right_linked_list (linked_list_t * p_list)
+{
+    return;
+}
 
-void clear_linked_list (linked_list_t * p_list);
+void clear_linked_list (linked_list_t * p_list)
+{
+    return;
+}
 
-int64_t search_linked_list (int item, linked_list_t * p_list);
+uint64_t search_linked_list (int item, linked_list_t * p_list)
+{
+    return 0;
+}
 
-uint64_t insert_linked_list (uint64_t index, int item, linked_list_t * p_list);
+uint64_t insert_linked_list (uint64_t index, int item, linked_list_t * p_list)
+{
+    return 0;
+}
 
-uint64_t remove_item_linked_list (int item, linked_list_t * p_list);
+uint64_t remove_item_linked_list (int item, linked_list_t * p_list)
+{
+    return 0;
+}
 
-uint64_t combine_linked_list (linked_list_t * p_target, linked_list_t * p_to_add);
+uint64_t combine_linked_list (linked_list_t * p_target, linked_list_t * p_to_add)
+{
+    return 0;
+}
 
-linked_list_node_t * get_element_linked_list (uint64_t index, linked_list_t * p_list);
+linked_list_node_t * get_element_linked_list (uint64_t index, linked_list_t * p_list)
+{
+    linked_list_node_t * p_ret_node = NULL;
 
-void print_linked_list (linked_list_t * p_list);
+    return p_ret_node;
+}
+
+void print_linked_list (linked_list_t * p_list)
+{
+    return;
+}
 
 /*Private Functions*/
 static linked_list_node_t * create_node (int data)

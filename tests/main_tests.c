@@ -20,12 +20,21 @@ int main (int argc, char * argv[])
         return CU_get_error();
     }
 
-    if ((NULL == CU_add_test(ll_test_suite, "test of create linked list", test_create_linked_list)) ||
-        (NULL == CU_add_test(ll_test_suite, "test of create empty list", test_create_empty_list)) ||
-        (NULL == CU_add_test(ll_test_suite, "test of append to linked list", test_append_linked_list)) ||
-        (NULL == CU_add_test(ll_test_suite, "testing append to empty list", test_append_empty_list)) ||
-        (NULL == CU_add_test(ll_test_suite, "testing prepend to empty list", test_prepend_empty_list)) ||
-        (NULL == CU_add_test(ll_test_suite, "testing prepend linked list", test_prepend_list))
+    if ((NULL == CU_add_test(ll_test_suite, "test create linked list", test_create_linked_list)) ||
+        (NULL == CU_add_test(ll_test_suite, "test create empty list", test_create_empty_list)) ||
+        (NULL == CU_add_test(ll_test_suite, "test append to linked list", test_append_linked_list)) ||
+        (NULL == CU_add_test(ll_test_suite, "test append to empty list", test_append_empty_list)) ||
+        (NULL == CU_add_test(ll_test_suite, "test prepend to empty list", test_prepend_empty_list)) ||
+        (NULL == CU_add_test(ll_test_suite, "test prepend linked list", test_prepend_list)) ||
+        (NULL == CU_add_test(ll_test_suite, "test delete left linked list", test_delete_left_ll)) ||
+        (NULL == CU_add_test(ll_test_suite, "test delete right linked list", test_delete_right_ll)) ||
+        (NULL == CU_add_test(ll_test_suite, "test clear linked list", test_clear_ll)) ||
+        (NULL == CU_add_test(ll_test_suite, "test clear empty linked list", test_clear_empty_ll)) ||
+        (NULL == CU_add_test(ll_test_suite, "test search valid item linked list", test_search_valid_item_ll)) ||
+        (NULL == CU_add_test(ll_test_suite, "test invalid search linked list", test_search_invalid_item_ll)) ||
+        (NULL == CU_add_test(ll_test_suite, "test valid insert linked list", test_insert_ll)) ||
+        (NULL == CU_add_test(ll_test_suite, "test invalid insert linked list", test_insert_insert_invalid_index)) ||
+        (0 == 1)
         )
     {
         CU_cleanup_registry();
