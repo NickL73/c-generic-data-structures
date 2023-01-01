@@ -131,6 +131,24 @@ void destroy_linked_list (linked_list_t * p_list)
     }
 } 
 
+void delete_left_linked_list (linked_list_t * p_list);
+
+void delete_right_linked_list (linked_list_t * p_list);
+
+void clear_linked_list (linked_list_t * p_list);
+
+int64_t search_linked_list (int item, linked_list_t * p_list);
+
+uint64_t insert_linked_list (uint64_t index, int item, linked_list_t * p_list);
+
+uint64_t remove_item_linked_list (int item, linked_list_t * p_list);
+
+uint64_t combine_linked_list (linked_list_t * p_target, linked_list_t * p_to_add);
+
+linked_list_node_t * get_element_linked_list (uint64_t index, linked_list_t * p_list);
+
+void print_linked_list (linked_list_t * p_list);
+
 /*Private Functions*/
 static linked_list_node_t * create_node (int data)
 {

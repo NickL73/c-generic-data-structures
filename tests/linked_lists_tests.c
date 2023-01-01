@@ -102,6 +102,36 @@ void test_prepend_list (void)
     destroy_linked_list(p_test);
 }
 
+void test_delete_left_ll(void)
+{
+    int test_items[] = {1, 2, 3, 4, 5};
+    
+    linked_list_t *      p_list     = create_new_linked_list(test_items, 5);
+    linked_list_node_t * p_expected = p_list->p_head->p_next;
+
+    delete_left_linked_list(p_list);
+
+    CU_ASSERT_EQUAL(p_list->size, 4);
+    CU_ASSERT_PTR_EQUAL(p_list->p_head, p_expected);
+
+    destroy_linked_list(p_list);
+}
+void test_delete_right_ll(void);
+void test_clear_empty_ll(void);
+void test_clear_ll(void);
+void test_search_valid_item_ll(void);
+void test_search_invalid_item_ll(void);
+void test_insert_ll(void);
+void test_insert_insert_invalid_index(void);
+void test_remove_item_ll(void);
+void test_remove_invalid_item(void);
+void test_combine_linked_list(void);
+void test_get_element_ll(void);
+void test_get_element_invalid_index_ll(void);
+//void test_print_linked_list(void);
+void test_delete_linked_list(void);
+
+/*Private Functions*/
 static uint8_t test_ll_contents (linked_list_t * p_list, int * p_input, size_t len)
 {
     int8_t               ret_val = 0;
