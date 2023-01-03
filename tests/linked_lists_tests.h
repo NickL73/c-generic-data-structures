@@ -6,6 +6,7 @@ void test_prepend_empty_list (void);
 void test_prepend_list (void);
 void test_delete_left_ll(void);
 void test_delete_right_ll(void);
+void test_delete_left_right_one_node_ll(void);
 void test_clear_empty_ll(void);
 void test_clear_ll(void);
 void test_search_valid_item_ll(void);

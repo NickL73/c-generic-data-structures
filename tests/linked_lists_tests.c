@@ -27,7 +27,6 @@ void test_create_empty_list (void)
     CU_ASSERT_EQUAL(p_test->size, 0);
 
     destroy_linked_list(p_test);
-
 }
 
 void test_append_linked_list (void)
@@ -142,8 +141,32 @@ void test_delete_right_ll(void)
     CU_ASSERT_EQUAL(p_list->size, 4);
     CU_ASSERT_PTR_NOT_EQUAL(p_new_tail, p_to_delete);
     CU_ASSERT_PTR_EQUAL(p_new_tail, p_expected);
+    CU_ASSERT_PTR_NULL(p_new_tail->p_next);
 
     destroy_linked_list(p_list); 
+}
+
+void test_delete_left_right_one_node_ll (void)
+{
+    int             test_nodes[] = {73};
+    linked_list_t * p_list_left  = create_new_linked_list(test_nodes, 1);
+
+    //Delete Left
+    delete_left_linked_list(p_list_left);
+    CU_ASSERT_PTR_NOT_NULL_FATAL(p_list_left);
+    CU_ASSERT_PTR_NULL(p_list_left->p_head);
+    CU_ASSERT_EQUAL(p_list_left->size, 0);
+
+    destroy_linked_list(p_list_left);
+
+    //Delete right
+    linked_list_t * p_list = create_new_linked_list(test_nodes, 1);
+    delete_right_linked_list(p_list);
+    CU_ASSERT_PTR_NOT_NULL_FATAL(p_list);
+    CU_ASSERT_PTR_NULL(p_list->p_head);
+    CU_ASSERT_EQUAL(p_list->size, 0);
+
+    destroy_linked_list(p_list);
 }
 
 void test_clear_empty_ll(void)
@@ -214,11 +237,94 @@ void test_insert_ll(void)
 
     destroy_linked_list(p_list);
 }
-// void test_insert_insert_invalid_index(void);
-// void test_remove_item_ll(void);
-// void test_remove_invalid_item(void);
-// void test_combine_linked_list(void);
-// void test_get_element_ll(void);
+
+void test_insert_insert_invalid_index (void)
+{
+    int             list_items[] = {1, 2, 3, 4, 5};
+    linked_list_t * p_list       = create_new_linked_list(list_items, 5);
+
+    uint64_t error_code = insert_linked_list(6, 45, p_list);
+
+    CU_ASSERT_EQUAL(error_code, INVALID_INDEX_ERROR);
+    CU_ASSERT_EQUAL(p_list->size, 5);
+
+    uint8_t check_contents = test_ll_contents(p_list, list_items, 5);
+    CU_ASSERT_EQUAL(check_contents, 1);
+
+    destroy_linked_list(p_list);
+}
+
+void test_remove_item_ll(void)
+{
+    int             list_items[] = {1, 7, 3, 4, 7};
+    linked_list_t * p_list       = create_new_linked_list(list_items, 5);
+
+    uint64_t error_code = remove_item_linked_list(7, p_list);
+    
+    CU_ASSERT_EQUAL(error_code, EXIT_SUCCESS);
+    CU_ASSERT_EQUAL(p_list->size, 4);
+
+    int     expected[] = {1, 3, 4, 7};
+    uint8_t comparison = test_ll_contents(p_list, expected, 4);
+
+    CU_ASSERT_EQUAL(comparison, 1);
+
+    //Removal when item is at the head
+    linked_list_node_t * p_new_head_expected = p_list->p_head->p_next;
+    error_code = remove_item_linked_list(1, p_list);
+    
+    CU_ASSERT_EQUAL(error_code, EXIT_SUCCESS);
+    CU_ASSERT_EQUAL(p_list->size, 3);
+    CU_ASSERT_PTR_EQUAL(p_list->p_head, p_new_head_expected);
+
+    int expected_2[] = {3, 4, 7};
+    comparison = test_ll_contents(p_list, expected_2, 3);
+    
+    CU_ASSERT_EQUAL(comparison, 1);
+
+    destroy_linked_list(p_list);
+}
+
+void test_remove_invalid_item(void)
+{
+    int             p_items[] = {1, 2, 3, 4, 5};
+    linked_list_t * p_list    = create_new_linked_list(p_items, 5);
+
+    //Create a copy, remove a non-existent node, and compare
+    linked_list_t * p_expected = p_list;
+
+    remove_item_linked_list(8, p_list);
+    CU_ASSERT_PTR_EQUAL(p_list, p_expected);
+
+    destroy_linked_list(p_list);
+}
+
+void test_extend_linked_list(void)
+{
+    int p_start[]  = {1, 2, 3, 4, 5};
+    int p_to_add[] = {9, 8, 7, 6, 5};
+    int expected[] = {1, 2, 3, 4, 5, 9, 8, 7, 6, 5};
+
+    linked_list_t * p_initial = create_new_linked_list(p_start, 5);
+    linked_list_t * p_add_in  = create_new_linked_list(p_to_add, 5);
+
+    uint64_t error_code = extend_linked_list(p_initial, p_add_in);
+
+    CU_ASSERT_EQUAL(error_code, EXIT_SUCCESS);
+
+    uint8_t content_check = test_ll_contents(p_initial, expected, 10);
+
+    CU_ASSERT_EQUAL(content_check, 1);
+    CU_ASSERT_EQUAL(p_initial->size, 10);
+    
+    destroy_linked_list(p_initial);
+    destroy_linked_list(p_add_in);
+}
+
+void test_get_element_ll(void)
+{
+
+}
 // void test_get_element_invalid_index_ll(void);
 // //void test_print_linked_list(void);
 // void test_delete_linked_list(void);

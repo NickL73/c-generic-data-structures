@@ -113,9 +113,17 @@ uint64_t insert_linked_list (uint64_t index, int item, linked_list_t * p_list);
 */
 uint64_t remove_item_linked_list (int item, linked_list_t * p_list);
 
-uint64_t replace_item_linked_list(int index, int new_item, linked_list_t * p_list);
-
-uint64_t combine_linked_list (linked_list_t * p_target, linked_list_t * p_to_add);
+/**
+ * @brief Extends a linked list with the elements of another linked list.
+ * 
+ * @param p_target A pointer to the linked_list_t to extend and add elements 
+ * into.
+ * @param p_to_add A pointer to the linked list from which all elements will be
+ * copied.
+ * 
+ * @return EXIT_SUCCESS on success, error code otherwise.
+*/
+uint64_t extend_linked_list (linked_list_t * p_target, linked_list_t * p_to_add);
 
 linked_list_node_t * get_element_linked_list (uint64_t index, linked_list_t * p_list);
 

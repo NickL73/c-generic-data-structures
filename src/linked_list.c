@@ -12,25 +12,18 @@ linked_list_t * create_new_linked_list (int * p_items, size_t num_items)
 {
     linked_list_t * p_new_list = NULL;
     
-    // if ((NULL == p_items) || (0 == num_items))
-    // {
-    //     goto COMPLETE;
-    // }
-    
     p_new_list = calloc(1, sizeof(linked_list_t));
-    if (NULL == p_new_list)
+    if (NULL != p_new_list)
     {
-        goto COMPLETE;
+        uint8_t error_status = 0;
+
+        for (size_t idx = 0; idx < num_items; idx++)
+        {
+            error_status = append_linked_list(*(p_items + idx), p_new_list);
+        }
     }
 
-    uint8_t error_status = 0;
-    for (size_t idx = 0; idx < num_items; idx++)
-    {
-        error_status = append_linked_list(*(p_items + idx), p_new_list);
-    }
-
-    COMPLETE:
-        return  p_new_list;
+    return  p_new_list;
 }
 
 uint64_t append_linked_list (int p_item, linked_list_t * p_list)
@@ -128,12 +121,58 @@ void destroy_linked_list (linked_list_t * p_list)
 
 void delete_left_linked_list (linked_list_t * p_list)
 {
-    return;
+    if (NULL != p_list)
+    {
+        linked_list_node_t * p_new_head = p_list->p_head->p_next;
+
+        memset(p_list->p_head, 0, sizeof(linked_list_node_t));
+        free(p_list->p_head);
+
+        p_list->p_head = p_new_head;
+        p_list->size   = p_list->size - 1;
+    }
 }
 
 void delete_right_linked_list (linked_list_t * p_list)
 {
-    return;
+    if (NULL != p_list)
+    {
+        linked_list_node_t * p_curr = p_list->p_head;
+
+        if (1 == p_list->size)
+        {
+           // linked_list_node_t * p_head = p_list->p_head;
+
+            memset(p_curr, 0, sizeof(linked_list_node_t));
+            free(p_curr);
+            p_curr = NULL;
+
+            p_list->p_head = NULL;
+            p_list->size -= 1;
+        }
+        
+        else /*Navigate to end of the list and delete tail*/
+        {
+            linked_list_node_t * p_prev = NULL;
+
+            while (NULL != p_curr->p_next)
+            {
+                p_prev = p_curr;
+                p_curr = p_curr->p_next;
+            }
+
+            //Remove reference to the tail node
+            p_prev->p_next = NULL;
+        
+
+            //Delete the tail node from memory
+            memset(p_curr, 0, sizeof(linked_list_node_t));
+            free(p_curr);
+            p_curr = NULL;
+
+            p_list->size -= 1;
+        }
+    }
 }
 
 void clear_linked_list (linked_list_t * p_list)
@@ -156,7 +195,7 @@ uint64_t remove_item_linked_list (int item, linked_list_t * p_list)
     return 0;
 }
 
-uint64_t combine_linked_list (linked_list_t * p_target, linked_list_t * p_to_add)
+uint64_t extend_linked_list (linked_list_t * p_target, linked_list_t * p_to_add)
 {
     return 0;
 }
