@@ -1,3 +1,6 @@
+#ifndef GENERICS_SLL_H
+#define GENERICS_SLL_H
+
 #include <stdint.h>
 
 #include "errors.h"
@@ -43,3 +46,5 @@ structure_status_t pop_back_sll (sll_t * p_list, void * p_return);
 structure_status_t search_sll (sll_t * p_list, void * p_data, uint64_t * p_idx);
 
 structure_status_t print_sll (sll_t * p_list);
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef GENERICS_H
+#define GENERICS_H
+
 typedef struct generic_helpers_t
 {
     void (*free_func)(void * p_data);
@@ -5,3 +8,5 @@ typedef struct generic_helpers_t
     int (*compare_func)(const void * p_data_1, const void * p_data_2);
     void (*print_func)(const void * p_data);
 } generic_helpers_t;
+
+#endif
