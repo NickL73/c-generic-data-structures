@@ -4,6 +4,7 @@
 typedef enum
 {
     FUNCTION_SUCCESS,
+    NOT_YET_IMPLEMENTED,
     GENERIC_FAILURE
 } structure_status_t;
 
