@@ -4,8 +4,10 @@
 typedef enum
 {
     FUNCTION_SUCCESS,
+    GENERIC_FAILURE,
     NOT_YET_IMPLEMENTED,
-    GENERIC_FAILURE
+    NULL_INPUT_ERROR,
+    MEMORY_ALLOCATION_FAILURE
 } structure_status_t;
 
 #endif

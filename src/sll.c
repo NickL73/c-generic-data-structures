@@ -1,13 +1,35 @@
-#include <stdint.h>
+#include <stddef.h>
 
 #include "errors.h"
 #include "generics.h"
+#include "sll.h"
 
 
 structure_status_t create_new_sll (sll_t ** pp_list, 
                                    generic_helpers_t * p_helper_functions)
 {
-    return NOT_YET_IMPLEMENTED;
+    structure_status_t error_code = GENERIC_FAILURE;
+    
+    if ((NULL == pp_list) || (NULL == p_helper_functions))
+    {
+        error_code = NULL_INPUT_ERROR;
+        goto COMPLETE;
+    }
+
+    sll_t * p_new_sll = calloc(1, sizeof(sll_t));
+    if (NULL == p_new_sll)
+    {
+        error_code = MEMORY_ALLOCATION_FAILURE;
+        goto COMPLETE;
+    }
+
+    p_new_sll->p_functions = p_helper_functions;
+
+    *pp_list = p_new_sll;
+    error_code = FUNCTION_SUCCESS;
+
+COMPLETE:
+    return error_code;
 }
 
 structure_status_t destroy_sll (sll_t * p_list)
