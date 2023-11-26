@@ -2,3 +2,6 @@
 .vscode/*
 build
 todo.txt
+CMakeFiles
+Makefile
+CMakeCache.txt
